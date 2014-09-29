@@ -11,7 +11,7 @@ namespace StudentProjects {
         public int ProjectWinner { get; set; }
     }
 
-    public class Class1 {
+    public class SimpleStudentProjects {
         //200 students
         //300 projects
         //students can choose top 5 projects

@@ -1,11 +1,11 @@
-﻿using Xunit;
+﻿
+using NUnit.Framework;
 
 namespace StudentProjects {
-    public class Class2 {
-        [Fact]
+    public class SimpleRecursion {
         public void DoSomething() {
             int total = Recursive(5);
-            Assert.Equal(10, total);
+            Assert.AreEqual(10, total);
         }
 
         public int Recursive(int value) {
