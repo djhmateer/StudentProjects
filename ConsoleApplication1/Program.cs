@@ -23,10 +23,10 @@ namespace ConsoleApplication1 {
             listOfStudents.Add(student6);
 
             var solver = new NestedLoopsIterativeStudent();
-            solver.numberOfNestedLoops = 7; // students
-            solver.numberOfIterations = 10; // projects.. have to be more projects than students!
-            solver.lastPositionInArray = solver.numberOfNestedLoops - 1;
-            solver.sequenceOfValues = new int[solver.numberOfNestedLoops];
+            solver.numberOfStudentsLoops = 7; // students
+            solver.numberOfIterationsProjects = 10; // projects.. have to be more projects than students!
+            solver.lastPositionInArray = solver.numberOfStudentsLoops - 1;
+            solver.sequenceOfValues = new int[solver.numberOfStudentsLoops];
 
             var sw = new Stopwatch();
         
