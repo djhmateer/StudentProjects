@@ -101,6 +101,31 @@ namespace StudentProjects {
         }
 
         [Test]
+        public void Given3StudentsWhoChoose3DifferentProjectsAsTheirTop_OverallRunScoreShouldBe3WhichIsPerfectFor3Students() {
+            var listOfStudents = new List<Student>();
+            var student0 = new Student { ProjectChoiceA = 1, ProjectChoiceB = 2, ProjectChoiceC = 3, ProjectWinner = 0 };
+            var student1 = new Student { ProjectChoiceA = 2, ProjectChoiceB = 3, ProjectChoiceC = 1, ProjectWinner = 0 };
+            var student2 = new Student { ProjectChoiceA = 3, ProjectChoiceB = 1, ProjectChoiceC = 2, ProjectWinner = 0 };
+            listOfStudents.Add(student0);
+            listOfStudents.Add(student1);
+            listOfStudents.Add(student2);
+
+            numberOfNestedLoops = 3; // Students
+            numberOfIterations = 3; // Projects
+            lastPositionInArray = numberOfNestedLoops - 1;
+            sequenceOfValues = new int[numberOfNestedLoops];
+
+            Tuple<List<Student>, int> tuple = Solve(listOfStudents);
+            int score = tuple.Item2;
+            List<Student> students = tuple.Item1;
+            Assert.AreEqual(1, students[0].ProjectWinner);
+            Assert.AreEqual(2, students[1].ProjectWinner);
+            Assert.AreEqual(3, students[2].ProjectWinner);
+
+            Assert.AreEqual(15, score);
+        }
+
+        [Test]
         public void Given4StudentsWhoChoose3DifferentProjectsAsTheirTop_OverallRunScoreShouldBe4WhichIsPerfectFor4Students() {
             var listOfStudents = new List<Student>();
             var student0 = new Student { ProjectChoiceA = 1, ProjectChoiceB = 2, ProjectChoiceC = 3, ProjectWinner = 0 };
@@ -129,7 +154,38 @@ namespace StudentProjects {
         }
 
         [Test]
-        public void Given3StudentsWhoChoose3DifferentProjectsAsTheirTop_OverallRunScoreShouldBe3WhichIsPerfectFor3Students() {
+        public void Given5StudentsWhoChoose3DifferentProjectsAsTheirTop_OverallRunScoreShouldBe4WhichIsPerfectFor4Students() {
+            var listOfStudents = new List<Student>();
+            var student0 = new Student { ProjectChoiceA = 1, ProjectChoiceB = 2, ProjectChoiceC = 3, ProjectWinner = 0 };
+            var student1 = new Student { ProjectChoiceA = 2, ProjectChoiceB = 3, ProjectChoiceC = 1, ProjectWinner = 0 };
+            var student2 = new Student { ProjectChoiceA = 3, ProjectChoiceB = 1, ProjectChoiceC = 2, ProjectWinner = 0 };
+            var student3 = new Student { ProjectChoiceA = 4, ProjectChoiceB = 1, ProjectChoiceC = 2, ProjectWinner = 0 };
+            var student4 = new Student { ProjectChoiceA = 5, ProjectChoiceB = 1, ProjectChoiceC = 2, ProjectWinner = 0 };
+            listOfStudents.Add(student0);
+            listOfStudents.Add(student1);
+            listOfStudents.Add(student2);
+            listOfStudents.Add(student3);
+            listOfStudents.Add(student4);
+
+            numberOfNestedLoops = 5; // 5 students
+            numberOfIterations = 5; // 5 projects.. have to be more projects than students!
+            lastPositionInArray = numberOfNestedLoops - 1;
+            sequenceOfValues = new int[numberOfNestedLoops];
+
+            Tuple<List<Student>, int> tuple = Solve(listOfStudents);
+            int score = tuple.Item2;
+            List<Student> students = tuple.Item1;
+            Assert.AreEqual(1, students[0].ProjectWinner);
+            Assert.AreEqual(2, students[1].ProjectWinner);
+            Assert.AreEqual(3, students[2].ProjectWinner);
+            Assert.AreEqual(4, students[3].ProjectWinner);
+            Assert.AreEqual(5, students[4].ProjectWinner);
+
+            Assert.AreEqual(25, score);
+        }
+
+        [Test]
+        public void Given3StudentsWhoChoose3DifferentProjectsAsTheirTopFromATotalOf4Projects_OverallRunScoreShouldBe() {
             var listOfStudents = new List<Student>();
             var student0 = new Student { ProjectChoiceA = 1, ProjectChoiceB = 2, ProjectChoiceC = 3, ProjectWinner = 0 };
             var student1 = new Student { ProjectChoiceA = 2, ProjectChoiceB = 3, ProjectChoiceC = 1, ProjectWinner = 0 };
@@ -138,8 +194,8 @@ namespace StudentProjects {
             listOfStudents.Add(student1);
             listOfStudents.Add(student2);
 
-            numberOfNestedLoops = 3; // Students
-            numberOfIterations = 3; // Projects
+            numberOfNestedLoops = 3; // students
+            numberOfIterations = 4; // projects.. have to be more projects than students!
             lastPositionInArray = numberOfNestedLoops - 1;
             sequenceOfValues = new int[numberOfNestedLoops];
 
@@ -151,6 +207,34 @@ namespace StudentProjects {
             Assert.AreEqual(3, students[2].ProjectWinner);
 
             Assert.AreEqual(15, score);
+        }
+
+        [Test]
+        public void Given4StudentsWhoChoose3DifferentProjectsAsTheirTopFromATotalOf6Projects_OverallRunScoreShouldBe() {
+            var listOfStudents = new List<Student>();
+            var student0 = new Student { ProjectChoiceA = 1, ProjectChoiceB = 2, ProjectChoiceC = 3, ProjectWinner = 0 };
+            var student1 = new Student { ProjectChoiceA = 2, ProjectChoiceB = 3, ProjectChoiceC = 1, ProjectWinner = 0 };
+            var student2 = new Student { ProjectChoiceA = 3, ProjectChoiceB = 1, ProjectChoiceC = 2, ProjectWinner = 0 };
+            var student3 = new Student { ProjectChoiceA = 4, ProjectChoiceB = 1, ProjectChoiceC = 2, ProjectWinner = 0 };
+            listOfStudents.Add(student0);
+            listOfStudents.Add(student1);
+            listOfStudents.Add(student2);
+            listOfStudents.Add(student3);
+
+            numberOfNestedLoops = 4; // students
+            numberOfIterations = 6; // projects.. have to be more projects than students!
+            lastPositionInArray = numberOfNestedLoops - 1;
+            sequenceOfValues = new int[numberOfNestedLoops];
+
+            Tuple<List<Student>, int> tuple = Solve(listOfStudents);
+            int score = tuple.Item2;
+            List<Student> students = tuple.Item1;
+            Assert.AreEqual(1, students[0].ProjectWinner);
+            Assert.AreEqual(2, students[1].ProjectWinner);
+            Assert.AreEqual(3, students[2].ProjectWinner);
+            Assert.AreEqual(4, students[3].ProjectWinner);
+
+            Assert.AreEqual(20, score);
         }
 
         public Tuple<List<Student>, int> Solve(List<Student> listOfStudents) {
