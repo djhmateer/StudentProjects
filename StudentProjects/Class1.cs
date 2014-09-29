@@ -41,7 +41,7 @@ namespace StudentProjects {
             Assert.AreEqual(1, students[1].ProjectWinner);
             Assert.AreEqual(3, students[2].ProjectWinner);
 
-            Assert.AreEqual(3, score);
+            Assert.AreEqual(15, score);
         }
 
         [Test]
@@ -69,11 +69,11 @@ namespace StudentProjects {
             Assert.AreEqual(3, students[1].ProjectWinner);
             Assert.AreEqual(2, students[2].ProjectWinner);
 
-            Assert.AreEqual(4, score);
+            Assert.AreEqual(14, score);
         }
 
         [Test]
-        public void Given3StudentsAnd2ChooseTheSameTopButDifferentSecond_OverallRunScoreShouldBe4ie2FirstAndASecond() {
+        public void Given3StudentsAnd2ChooseTheSameTopButDifferentSecond_OverallRunScoreShouldBe14ie2FirstAndASecond() {
             var listOfStudents = new List<Student>();
             //First choice
             var student0 = new Student { ProjectChoiceA = 1, ProjectChoiceB = 2, ProjectChoiceC = 3, ProjectWinner = 0 };
@@ -97,7 +97,7 @@ namespace StudentProjects {
             Assert.AreEqual(2, students[1].ProjectWinner);
             Assert.AreEqual(3, students[2].ProjectWinner);
 
-            Assert.AreEqual(4, score);
+            Assert.AreEqual(14, score);
         }
 
         [Test]
@@ -106,11 +106,13 @@ namespace StudentProjects {
             var student0 = new Student { ProjectChoiceA = 1, ProjectChoiceB = 2, ProjectChoiceC = 3, ProjectWinner = 0 };
             var student1 = new Student { ProjectChoiceA = 2, ProjectChoiceB = 3, ProjectChoiceC = 1, ProjectWinner = 0 };
             var student2 = new Student { ProjectChoiceA = 3, ProjectChoiceB = 1, ProjectChoiceC = 2, ProjectWinner = 0 };
+            var student3 = new Student { ProjectChoiceA = 4, ProjectChoiceB = 1, ProjectChoiceC = 2, ProjectWinner = 0 };
             listOfStudents.Add(student0);
             listOfStudents.Add(student1);
             listOfStudents.Add(student2);
+            listOfStudents.Add(student3);
 
-            numberOfNestedLoops = 3; // 3 students
+            numberOfNestedLoops = 4; // 3 students
             numberOfIterations = 4; // 4 projects
             lastPositionInArray = numberOfNestedLoops - 1;
             sequenceOfValues = new int[numberOfNestedLoops];
@@ -121,8 +123,9 @@ namespace StudentProjects {
             Assert.AreEqual(1, students[0].ProjectWinner);
             Assert.AreEqual(2, students[1].ProjectWinner);
             Assert.AreEqual(3, students[2].ProjectWinner);
+            Assert.AreEqual(4, students[3].ProjectWinner);
 
-            Assert.AreEqual(3, score);
+            Assert.AreEqual(20, score);
         }
 
         [Test]
@@ -147,12 +150,12 @@ namespace StudentProjects {
             Assert.AreEqual(2, students[1].ProjectWinner);
             Assert.AreEqual(3, students[2].ProjectWinner);
 
-            Assert.AreEqual(3, score);
+            Assert.AreEqual(15, score);
         }
 
         public Tuple<List<Student>, int> Solve(List<Student> listOfStudents) {
             InitLoops();
-            int lowestScore = 99999;
+            int highestScore = 0;
 
             // Make a projectsChoice array of 1,2,3... 
             var projectsChoice = new int[numberOfIterations];
@@ -186,15 +189,16 @@ namespace StudentProjects {
 
                     // get score for this permutation
                     int score = 0;
+                    bool gotOne = false;
                     // loop over students and score
                     for (int i = 0; i < numberOfNestedLoops; i++) {
-                        if (listOfStudents[i].ProjectTry == listOfStudents[i].ProjectChoiceA) score += 1;
-                        if (listOfStudents[i].ProjectTry == listOfStudents[i].ProjectChoiceB) score += 2;
-                        if (listOfStudents[i].ProjectTry == listOfStudents[i].ProjectChoiceC) score += 3;
+                        if (listOfStudents[i].ProjectTry == listOfStudents[i].ProjectChoiceA) { score += 5; gotOne = true; }
+                        if (listOfStudents[i].ProjectTry == listOfStudents[i].ProjectChoiceB) { score += 4; gotOne = true; }
+                        if (listOfStudents[i].ProjectTry == listOfStudents[i].ProjectChoiceC) { score += 3; gotOne = true; }
                     }
-                    // is this the lowest score, remember which projects
-                    if (score <= lowestScore) {
-                        lowestScore = score;
+                    // is this the highest score, remember which projects
+                    if (score >= highestScore && gotOne) {
+                        highestScore = score;
                         for (int i = 0; i < numberOfNestedLoops; i++) {
                             listOfStudents[i].ProjectWinner = listOfStudents[i].ProjectTry;
                         }
@@ -208,7 +212,7 @@ namespace StudentProjects {
                     sequenceOfValues[currentPositionInSOV] = 1;
                     currentPositionInSOV--;
 
-                    if (currentPositionInSOV < 0) return Tuple.Create(listOfStudents, lowestScore);
+                    if (currentPositionInSOV < 0) return Tuple.Create(listOfStudents, highestScore);
                     sequenceOfValues[currentPositionInSOV] += 1;
                 }
             }
