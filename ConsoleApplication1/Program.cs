@@ -24,7 +24,7 @@ namespace ConsoleApplication1 {
 
             var solver = new NestedLoopsIterativeStudent();
             solver.numberOfNestedLoops = 7; // students
-            solver.numberOfIterations = 7; // projects.. have to be more projects than students!
+            solver.numberOfIterations = 10; // projects.. have to be more projects than students!
             solver.lastPositionInArray = solver.numberOfNestedLoops - 1;
             solver.sequenceOfValues = new int[solver.numberOfNestedLoops];
 

@@ -20,31 +20,6 @@ namespace StudentProjects {
         //}
 
         [Test]
-        public void Given3StudentsWhoChoose3DifferentProjectsAsTheirTopDifferentOrder_OverallRunScoreShouldBe3WhichIsPerfectFor3Students() {
-            var listOfStudents = new List<Student>();
-            var student0 = new Student { ProjectChoiceA = 2, ProjectChoiceB = 3, ProjectChoiceC = 1, ProjectWinner = 0 };
-            var student1 = new Student { ProjectChoiceA = 1, ProjectChoiceB = 2, ProjectChoiceC = 3, ProjectWinner = 0 };
-            var student2 = new Student { ProjectChoiceA = 3, ProjectChoiceB = 1, ProjectChoiceC = 2, ProjectWinner = 0 };
-            listOfStudents.Add(student0);
-            listOfStudents.Add(student1);
-            listOfStudents.Add(student2);
-
-            numberOfNestedLoops = 3;
-            numberOfIterations = 3;
-            lastPositionInArray = numberOfNestedLoops - 1;
-            sequenceOfValues = new int[numberOfNestedLoops];
-
-            Tuple<List<Student>, int> tuple = Solve(listOfStudents);
-            int score = tuple.Item2;
-            List<Student> students = tuple.Item1;
-            Assert.AreEqual(2, students[0].ProjectWinner);
-            Assert.AreEqual(1, students[1].ProjectWinner);
-            Assert.AreEqual(3, students[2].ProjectWinner);
-
-            Assert.AreEqual(15, score);
-        }
-
-        [Test]
         public void Given3StudentsAnd2ChooseTheSameTopButDifferentThird_OverallRunScoreShould() {
             var listOfStudents = new List<Student>();
             //First choice
@@ -301,6 +276,31 @@ namespace StudentProjects {
             Assert.AreEqual(6, students[5].ProjectWinner);
 
             Assert.AreEqual(30, score);
+        }
+
+        [Test]
+        public void Given3StudentsWhoChoose3DifferentProjectsAsTheirTopDifferentOrder_OverallRunScoreShouldBe3WhichIsPerfectFor3Students() {
+            var listOfStudents = new List<Student>();
+            var student0 = new Student { ProjectChoiceA = 2, ProjectChoiceB = 3, ProjectChoiceC = 1, ProjectWinner = 0 };
+            var student1 = new Student { ProjectChoiceA = 1, ProjectChoiceB = 2, ProjectChoiceC = 3, ProjectWinner = 0 };
+            var student2 = new Student { ProjectChoiceA = 3, ProjectChoiceB = 1, ProjectChoiceC = 2, ProjectWinner = 0 };
+            listOfStudents.Add(student0);
+            listOfStudents.Add(student1);
+            listOfStudents.Add(student2);
+
+            numberOfNestedLoops = 3;
+            numberOfIterations = 3;
+            lastPositionInArray = numberOfNestedLoops - 1;
+            sequenceOfValues = new int[numberOfNestedLoops];
+
+            Tuple<List<Student>, int> tuple = Solve(listOfStudents);
+            int score = tuple.Item2;
+            List<Student> students = tuple.Item1;
+            Assert.AreEqual(2, students[0].ProjectWinner);
+            Assert.AreEqual(1, students[1].ProjectWinner);
+            Assert.AreEqual(3, students[2].ProjectWinner);
+
+            Assert.AreEqual(15, score);
         }
 
         public Tuple<List<Student>, int> Solve(List<Student> listOfStudents) {
