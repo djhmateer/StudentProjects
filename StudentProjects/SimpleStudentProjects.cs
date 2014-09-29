@@ -9,6 +9,7 @@ namespace StudentProjects {
         public int ProjectChoiceB { get; set; }
         public int ProjectChoiceC { get; set; }
         public int ProjectWinner { get; set; }
+        public int ProjectTry { get; set; }
     }
 
     public class SimpleStudentProjects {
