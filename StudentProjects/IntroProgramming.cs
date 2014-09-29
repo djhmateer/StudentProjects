@@ -57,31 +57,31 @@ namespace StudentProjects {
         int numberOfNestedLoops;
         int numberOfIterations;
         int[] sequenceOfValues;
+        int lastPositionInArray;
 
         [Test]
         public void DoSomething() {
             numberOfNestedLoops = 3;
             numberOfIterations = 2;
+            lastPositionInArray = numberOfNestedLoops - 1;
             sequenceOfValues = new int[numberOfNestedLoops];
             NestedLoops();
         }
 
         public void NestedLoops() {
             InitLoops();
-
             while (true) {
                 PrintLoops();
 
-                int currentPositionInSOV = numberOfNestedLoops - 1;
-                sequenceOfValues[currentPositionInSOV] = sequenceOfValues[currentPositionInSOV] + 1;
+                int currentPositionInSOV = lastPositionInArray;
+                sequenceOfValues[currentPositionInSOV] += 1;
 
                 while (sequenceOfValues[currentPositionInSOV] > numberOfIterations) {
                     sequenceOfValues[currentPositionInSOV] = 1;
                     currentPositionInSOV--;
 
-                    if (currentPositionInSOV < 0) return;
-
-                    sequenceOfValues[currentPositionInSOV] = sequenceOfValues[currentPositionInSOV] + 1;
+                    if (currentPositionInSOV < 0) return; // break out of while
+                    sequenceOfValues[currentPositionInSOV] += 1;
                 }
             }
         }
