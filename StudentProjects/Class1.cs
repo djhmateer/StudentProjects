@@ -10,17 +10,17 @@ namespace StudentProjects {
         int[] sequenceOfValues;
         int lastPositionInArray;
 
-        [Test]
-        public void DoSomething() {
-            numberOfNestedLoops = 3;
-            numberOfIterations = 3;
-            lastPositionInArray = numberOfNestedLoops - 1;
-            sequenceOfValues = new int[numberOfNestedLoops];
-            Solve();
-        }
+        //[Test]
+        //public void DoSomething() {
+        //    numberOfNestedLoops = 3;
+        //    numberOfIterations = 3;
+        //    lastPositionInArray = numberOfNestedLoops - 1;
+        //    sequenceOfValues = new int[numberOfNestedLoops];
+        //    Solve();
+        //}
 
-        public void Solve() {
-            var projects = new[] { 1, 2, 3 };
+        [Test]
+        public void Given3StudentsWhoChoose3DifferentProjectsAsTheirTop_OverallRunScoreShouldBe3WhichIsPerfectFor3Students() {
             var listOfStudents = new List<Student>();
             var student0 = new Student { ProjectChoiceA = 1, ProjectChoiceB = 2, ProjectChoiceC = 3, ProjectWinner = 0 };
             var student1 = new Student { ProjectChoiceA = 2, ProjectChoiceB = 3, ProjectChoiceC = 1, ProjectWinner = 0 };
@@ -29,6 +29,22 @@ namespace StudentProjects {
             listOfStudents.Add(student1);
             listOfStudents.Add(student2);
 
+            numberOfNestedLoops = 3;
+            numberOfIterations = 3;
+            lastPositionInArray = numberOfNestedLoops - 1;
+            sequenceOfValues = new int[numberOfNestedLoops];
+
+            Tuple<List<Student>, int> tuple = Solve(listOfStudents);
+            int score = tuple.Item2;
+            List<Student> students = tuple.Item1;
+            Assert.AreEqual(1, students[0].ProjectWinner);
+            Assert.AreEqual(2, students[1].ProjectWinner);
+            Assert.AreEqual(3, students[2].ProjectWinner);
+
+            Assert.AreEqual(3, score);
+        }
+
+        public Tuple<List<Student>, int> Solve(List<Student> listOfStudents) {
             InitLoops();
             int lowestScore = 99999;
             while (true) {
@@ -66,7 +82,6 @@ namespace StudentProjects {
                         listOfStudents[2].ProjectWinner = projectForStudent2;
                     }
                 }
-
                
                 int currentPositionInSOV = lastPositionInArray;
                 sequenceOfValues[currentPositionInSOV] += 1;
@@ -75,7 +90,7 @@ namespace StudentProjects {
                     sequenceOfValues[currentPositionInSOV] = 1;
                     currentPositionInSOV--;
 
-                    if (currentPositionInSOV < 0) return; // break out of while
+                    if (currentPositionInSOV < 0) return Tuple.Create(listOfStudents, lowestScore);
                     sequenceOfValues[currentPositionInSOV] += 1;
                 }
             }
