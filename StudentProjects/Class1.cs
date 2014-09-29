@@ -397,8 +397,9 @@ namespace StudentProjects {
                 bool duplicates = CheckForDuplicates();
 
                 if (!duplicates) {
+                    PrintLoops();
                     // loop over students and score
-                    highestScore = LoopOverstudentsAndGetScore(listOfStudents, highestScore);
+                    highestScore = LoopOverStudentsAndGetScore(listOfStudents, highestScore);
                 }
 
                 int currentPositionInSOV = lastPositionInArray;
@@ -434,7 +435,7 @@ namespace StudentProjects {
             return duplicates;
         }
 
-        private int LoopOverstudentsAndGetScore(List<Student> listOfStudents, int highestScore) {
+        private int LoopOverStudentsAndGetScore(List<Student> listOfStudents, int highestScore) {
             int score = 0;
             bool gotOne = false;
             for (int i = 0; i < numberOfStudentsLoops; i++) {
