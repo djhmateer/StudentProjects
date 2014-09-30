@@ -17,7 +17,7 @@ namespace StudentProjects {
         //    numberOfIterationsProjects = 3;
         //    lastPositionInArray = numberOfStudentsLoops - 1;
         //    sequenceOfValues = new int[numberOfStudentsLoops];
-        //    Solve();
+        //    UniqueFirstChoiceFilter();
         //}
 
         [Test]
